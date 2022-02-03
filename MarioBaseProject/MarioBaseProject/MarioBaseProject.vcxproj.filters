@@ -26,5 +26,11 @@
     <Library Include="SDL2\lib\x86\SDL2.lib" />
     <Library Include="SDL2\lib\x86\SDL2main.lib" />
     <Library Include="SDL2\lib\x86\SDL2test.lib" />
+    <Library Include="SDL2\lib\x86\SDL2_image.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
