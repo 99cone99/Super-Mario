@@ -12,6 +12,7 @@ Character::Character(SDL_Renderer* renderer, string imagePath, Vector2D start_po
 	m_moving_left = false;
 	m_moving_right = false;
 	m_current_level_map = map;
+	m_alive = true;
 	if (!m_texture->LoadFromFile(imagePath))
 	{
 		std::cout << "Failed to load character texture!" << std::endl;
@@ -46,6 +47,9 @@ void Character::Update(float deltaTime, SDL_Event e)
 
 	//Deal with gravity
 
+	//cout << centralX_position << " " << foot_position << " " << m_current_level_map->GetTileAt(foot_position, centralX_position) << endl;
+	//cout << m_can_jump << endl;
+
 	//deal with gravity
 	if (m_current_level_map->GetTileAt(foot_position, centralX_position) == 0)
 	{
@@ -58,15 +62,12 @@ void Character::Update(float deltaTime, SDL_Event e)
 	}
 
 
-
-	
-
-
-
-
 	//deal with jumping first
 	if (m_jumping)
 	{
+
+		m_can_jump = false;
+
 		//adjust position
 		m_position.y -= m_jump_force * deltaTime;
 
@@ -86,10 +87,6 @@ void Character::Update(float deltaTime, SDL_Event e)
 	{
 		MoveRight(deltaTime);
 	}
-
-	//SDL_PollEvent(&e);
-
-
 }
 
 void Character::SetPosition(Vector2D new_position)
@@ -105,13 +102,13 @@ Vector2D Character::GetPosition()
 void Character::MoveLeft(float deltaTime)
 {
 	m_facing_direction = FACING_LEFT;
-	m_position.x -= deltaTime * MOVEMENTSPEED;
+	m_position.x -= deltaTime * MOVEMENTSPEED * character_speed_mult;
 }
 
 void Character::MoveRight(float deltaTime)
 {
 	m_facing_direction = FACING_RIGHT;
-	m_position.x += deltaTime * MOVEMENTSPEED;
+	m_position.x += deltaTime * MOVEMENTSPEED * character_speed_mult;
 }
 
 void Character::AddGravity(float deltaTime)
@@ -132,7 +129,7 @@ void Character::Jump()
 	{
 		m_jump_force = INITIAL_JUMP_FORCE;
 		m_jumping = true;
-		m_can_jump = false;
+		//m_can_jump = false;
 	}
 }
 

@@ -25,6 +25,10 @@ public:
 	float GetCollisionRadius();
 	Vector2D GetPosition();
 	Rect2D GetCollisionBox() { return Rect2D(m_position.x, m_position.y, m_texture->GetWidth(), m_texture->GetHeight()); }
+	bool IsJumping() { return m_jumping; }
+	void CancelJump() { m_jumping = false; }
+	void SetAlive(bool isAlive) { m_alive = isAlive; }
+	bool GetAlive() { return m_alive;  }
 
 protected:
 	SDL_Renderer* m_renderer;
@@ -43,9 +47,14 @@ protected:
 	float m_jump_force;
 
 	float m_collision_radius;
+	float m_movement_speed;
+	FACING m_facing_direction;
+
+	bool m_alive;
+
+	int character_speed_mult;
 
 private:
-	FACING m_facing_direction;
 	LevelMap* m_current_level_map;
 };
 

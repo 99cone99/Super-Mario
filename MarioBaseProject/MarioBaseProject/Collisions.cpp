@@ -31,6 +31,12 @@ bool Collisions::Circle(Character* character1, Character* character2)
 	return distance < combined_distance;
 }
 
+bool Collisions::Circle(Vector2D pos1, Vector2D pos2, float rad1, float rad2)
+{
+	return false;
+}
+
+
 bool Collisions::Box(Rect2D rect1, Rect2D rect2)
 {
 	if (rect1.x + (rect1.width / 2) > rect2.x &&

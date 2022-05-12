@@ -1,4 +1,5 @@
 #include "LevelMap.h"
+#include <iostream>
 
 /*
  * when making a map, remember:
@@ -38,8 +39,14 @@ int LevelMap::GetTileAt(unsigned int h, unsigned int w)
 {
 	if (h < MAP_HEIGHT && w < MAP_WIDTH)
 	{
+
 		return m_map[h][w];
 	}
 
 	return 0;
+}
+
+void LevelMap::ChangeTileAt(unsigned int row, unsigned int colum, unsigned int new_value)
+{
+	m_map[row][colum] = new_value;
 }
